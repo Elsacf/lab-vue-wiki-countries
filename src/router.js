@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from './views/HomeView.vue'
+import CountriesDetails from './views/CountriesDetails.vue'
 
 const routes = [
   {
@@ -7,18 +8,11 @@ const routes = [
     name: 'root',
     component: HomeView,
   },
-//   {
-//     path: '/list',
-//     name: 'list',
-//     component: () => import(/* webpackChunkName: 'list' */ './pages/CountriesList.vue'),
-//     children: [
-//       {
-//         path: '/details',
-//         name: 'details',
-//         component: () => import(/* webpackChunkName: 'details' */ './pages/CountriesDetails.vue')
-//       },
-//     ]
-//   }
+  {
+    path: '/:countryCode',
+    name: 'countryDetails',
+    component: CountriesDetails,
+  },
 ];
 
 export default createRouter({
