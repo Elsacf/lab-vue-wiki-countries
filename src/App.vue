@@ -1,14 +1,43 @@
 <template>
   <div className="app">
-    <router-view />
-  </div>
+   <Navbar />
+   <div class="container">
+      <CountriesList :countries="getCountriesElementsToShowList" />
+      <router-view />
+      </div>
+   </div>
 </template>
 
 <script>
-  import logo from './logo.svg';
+import countriesData from '../public/countries.json';
+import Navbar from './components/Navbar.vue';
+import CountriesList from './components/CountriesList.vue';
+
   export default {
-    name: 'App',
-  }
+    name: "App",
+    components: {
+    Navbar,
+    CountriesList,
+},
+data() {
+  return {
+    countries: countriesData,
+  };
+},
+computed: {
+  getCountriesElementsToShowList() {
+    return this.countries.map(country => {
+      let countryId = 0;
+      return {
+        id: countryId++,
+        name: country.name.common,
+        alpha2Code: country.alpha2Code.toLowerCase(),
+        alpha3Code: country.alpha3Code,
+      };
+    });
+  },
+},
+};
 </script>
 
 <style>
@@ -20,6 +49,15 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.container {
+  margin-top: 1rem;
+  height: calc(100vh - 50px);
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  overflow: scroll;
+} 
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
